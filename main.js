@@ -21,48 +21,50 @@ document.addEventListener('DOMContentLoaded', function() {
     let grayscaleMode = false;
 
     function initGrid() {
-        for (let i = 0; i < gridSize; i++) {
-            const headerCell = document.createElement('div');
-            headerCell.className = 'grid-cell-header';
-            headerCell.textContent = i + 1;
-            gridHeader.appendChild(headerCell);
-        }
+		gridHeader.innerHTML = ''; // Limpa o cabeçalho antes de recriá-lo
+		gridContent.innerHTML = ''; // Limpa o conteúdo da grade
+		pixelData = [];
 
-        gridContent.innerHTML = '';
-        pixelData = [];
+		for (let i = 0; i < gridSize; i++) {
+		    const headerCell = document.createElement('div');
+		    headerCell.className = 'grid-cell-header';
+		    headerCell.textContent = i + 1;
+		    gridHeader.appendChild(headerCell);
+		}
 
-        for (let y = 0; y < gridSize; y++) {
-            const row = document.createElement('div');
-            row.className = 'grid-row';
-            const rowHeader = document.createElement('div');
-            rowHeader.className = 'grid-row-header';
-            rowHeader.textContent = y + 1;
-            row.appendChild(rowHeader);
-            pixelData[y] = [];
+		for (let y = 0; y < gridSize; y++) {
+		    const row = document.createElement('div');
+		    row.className = 'grid-row';
+		    const rowHeader = document.createElement('div');
+		    rowHeader.className = 'grid-row-header';
+		    rowHeader.textContent = y + 1;
+		    row.appendChild(rowHeader);
+		    pixelData[y] = [];
 
-            for (let x = 0; x < gridSize; x++) {
-                const pixel = document.createElement('div');
-                pixel.className = 'pixel';
-                pixel.dataset.x = x;
-                pixel.dataset.y = y;
-                pixel.style.backgroundColor = 'white';
-                pixelData[y][x] = 'white';
-                
-                pixel.addEventListener('click', function() {
-                    this.style.backgroundColor = currentColor;
-                    pixelData[y][x] = currentColor;
-                });
-                
-                pixel.addEventListener('dblclick', function() {
-                    this.style.backgroundColor = 'white';
-                    pixelData[y][x] = 'white';
-                });
-                
-                row.appendChild(pixel);
-            }
-            gridContent.appendChild(row);
-        }
-    }
+		    for (let x = 0; x < gridSize; x++) {
+		        const pixel = document.createElement('div');
+		        pixel.className = 'pixel';
+		        pixel.dataset.x = x;
+		        pixel.dataset.y = y;
+		        pixel.style.backgroundColor = 'white';
+		        pixelData[y][x] = 'white';
+		        
+		        pixel.addEventListener('click', function() {
+		            this.style.backgroundColor = currentColor;
+		            pixelData[y][x] = currentColor;
+		        });
+		        
+		        pixel.addEventListener('dblclick', function() {
+		            this.style.backgroundColor = 'white';
+		            pixelData[y][x] = 'white';
+		        });
+		        
+		        row.appendChild(pixel);
+		    }
+		    gridContent.appendChild(row);
+		}
+	}
+
 
     function convertImage() {
         if (!originalImage.src || originalImage.src.includes('placeholder')) {
@@ -121,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     originalImage.src = '';
 
     convertBtn.addEventListener('click', convertImage);
+    
     clearBtn.addEventListener('click', initGrid);
     downloadBtn.addEventListener('click', function() {
         const canvas = document.createElement('canvas');
