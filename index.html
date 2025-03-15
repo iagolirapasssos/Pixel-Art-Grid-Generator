@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Pixel Art 16x16</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Conversor de Pixel Art 16x16</h1>
+    
+    <div class="container">
+        <div class="upload-section">
+            <label for="imageInput" class="upload-btn">Escolher Imagem</label>
+            <input type="file" id="imageInput" class="file-input" accept="image/*">
+            <p id="fileName">Nenhuma imagem selecionada</p>
+        </div>
+        
+        <div class="color-controls">
+            <div class="color-selector">
+                <label for="brushColor">Cor do pincel: </label>
+                <input type="color" id="brushColor" class="color-picker" value="#000000">
+            </div>
+            
+            <div class="mode-selector">
+                <span>Modo de conversão: </span>
+                <label class="radio-label">
+                    <input type="radio" name="colorMode" value="color" checked> Colorido
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="colorMode" value="bw"> Preto e Branco
+                </label>
+            </div>
+            
+            <div class="bw-threshold" id="thresholdControl">
+                <label for="threshold">Limite P&B (0-255): </label>
+                <input type="range" id="threshold" min="0" max="255" value="128" class="threshold-slider">
+                <span id="thresholdValue">128</span>
+            </div>
+        </div>
+        
+        <div class="preview">
+            <div class="original-image">
+                <h3>Imagem Original</h3>
+                <img id="originalImage" src="placeholder.png" alt="Preview da imagem">
+            </div>
+            
+            <div class="pixel-grid-container">
+                <h3>Grade de Pixel Art 16x16</h3>
+                <div id="pixelGrid">
+                    <div class="grid-header" id="gridHeader"></div>
+                    <div id="gridContent"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="convertBtn" class="btn">Converter Imagem</button>
+            <button id="clearBtn" class="btn">Limpar Grade</button>
+            <button id="downloadBtn" class="btn btn-download">Baixar Pixel Art</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>Como usar:</h3>
+            <ol>
+                <li>Clique em "Escolher Imagem" para selecionar uma imagem do seu computador.</li>
+                <li>Escolha o modo de conversão (colorido ou preto e branco).</li>
+                <li>Se escolher preto e branco, ajuste o valor de limite conforme necessário.</li>
+                <li>Clique em "Converter Imagem" para transformar a imagem em pixel art 16x16.</li>
+                <li>Você pode clicar em qualquer pixel da grade para mudar sua cor (usando a cor selecionada).</li>
+                <li>Use o seletor de cor para escolher cores diferentes para editar a pixel art.</li>
+                <li>Clique em "Limpar Grade" para remover todos os pixels.</li>
+                <li>Quando terminar, clique em "Baixar Pixel Art" para salvar sua criação.</li>
+            </ol>
+            <p>Este é um ótimo recurso para ensinar crianças a criar arte em pixels seguindo uma imagem de referência ou criando do zero!</p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
